@@ -1,0 +1,33 @@
+@include block(title) {
+  text-transform: uppercase;
+  font-weight: 300;
+  
+  @include modifier(large) {
+    @include font-vw(24px);
+    @include up-vw(margin-top, 55px);
+    @include up-vw(margin-bottom, 34px);
+  }
+
+  @include modifier(medium) {
+    @include font-vw(18px);
+    @include up-vw(margin-top, 55px);
+    @include up-vw(margin-bottom, 34px);
+  }
+
+  @include modifier(small) {
+  
+  }
+
+  @include modifier(notm) {
+    margin-top: 0;
+  }
+}
+
+@include block(list) {
+  list-style: none;
+  padding: 0;
+
+  li {
+    @include padding-vw(6.5px);
+  }
+}

@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  min-height: 100%;
+}
+
+ul {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  @include font-vw(16px);
+  font-family: 'Montserrat', sans-serif;
+  background-color: #eeecf9;
+}
+
+a {
+  color: $c-link;
+
+  &:hover {
+    color: lighten($c-link, 21%);
+  }
+}
+@include block(page) {
+  @include container-full;
+  @include up-vw(margin-top, 55px);
+
+  @include element(main) {
+    width: 66%;   
+    @include up-vw(padding-right, 34px);
+  }
+
+  @include element(side) {
+    width: 34%;
+  }
+
+  @include element(header) {
+    display: flex;
+    justify-content: space-between;
+    @include up-vw(margin-top, 34px);
+  }
+
+  @include element(title) {
+    width: 100%;
+    display: block;
+    margin: 0;
+    font-weight: 300;
+    @include up-vw(margin-bottom, 34px);
+    @include font-vw(24px);
+    @include title;
+  }
+  
+  @include element(grid) {
+    width: 100%;
+  }
+
+}
+@include block(badge) {
+  @include font-vw(10px);
+  @include padding-vw(3px, 6px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include modifier (position_top_right) {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+  }
+
+  @include modifier(primary) {
+    background-color: $primary;
+    color: $light;
+  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}

@@ -1,0 +1,1150 @@
+@include block(pseudoIcon) {
+  position: relative;
+  &::after, &::before {
+    content: '';
+  }
+
+  @include modifier(arrow_right) {
+    
+
+    &::after {
+      //position: absolute;
+      margin-left: .5em;
+      width: .3em;
+      height: .3em;
+      border-top: .1em solid;      
+      border-right: .1em solid;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.ri-alarm {
+  background: linear-gradient( to left, currentColor 5px, transparent 0)no-repeat 4.5px 6px/5px 2px, linear-gradient( to left, currentColor 7px, transparent 0)no-repeat 4.5px 2px/2px 6px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  transform: scale(var(--ris, 1));
+  box-shadow: 0 0 0 2px
+}
+
+.ri-alarm::after,
+.ri-alarm::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 6px;
+  height: 2px;
+  background: currentColor;
+  top: -4px
+}
+
+.ri-alarm::before {
+  left: -5px;
+  transform: rotate(-42deg)
+}
+
+.ri-alarm::after {
+  transform: rotate(42deg);
+  right: -5px
+}
+
+.ri-awards {
+  display: block;
+  position: relative;
+  transform: scale(var(--ris, 1));
+  box-sizing: border-box;
+  width: 16px;
+  height: 20px;
+  border: 4px solid transparent;
+  border-top: 12px solid transparent;
+  border-bottom: 0;
+  box-shadow: inset 4px 0 0 -2px, inset -4px 0 0 -2px
+}
+
+.ri-awards::after,
+.ri-awards::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  display: block;
+  border: 2px solid
+}
+
+.ri-awards::before {
+  width: 14px;
+  height: 14px;
+  border-radius: 22px;
+  top: -12px;
+  left: -3px
+}
+
+.ri-awards::after {
+  width: 6px;
+  height: 6px;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-bottom-left-radius: 1px;
+  border-top-right-radius: 1px;
+  transform: rotate(45deg);
+  bottom: -3px;
+  left: 1px
+}
+
+.ri-backspace {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  transform: scale(var(--ris, 1));
+  border: 2px solid;
+  border-left: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px
+}
+
+.ri-backspace::after,
+.ri-backspace::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+}
+
+.ri-backspace::before {
+  background: linear-gradient( to left, currentColor 18px, transparent 0)no-repeat center center/10px 2px;
+  border-right: 3px solid transparent;
+  box-shadow: inset 0 0 0 2px;
+  right: 2px;
+  bottom: 1px;
+  width: 8px;
+  height: 8px;
+  border-left: 3px solid transparent;
+  transform: rotate(45deg)
+}
+
+.ri-backspace::after {
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-top-left-radius: 1px;
+  transform: rotate(-45deg);
+  top: 0;
+  left: -5px
+}
+
+.ri-bot {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 21px;
+  height: 10px;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px, -4px 0 0 -1px, 4px 0 0 -1px, inset 0 -4px 0 -2px
+}
+
+.ri-bot::after,
+.ri-bot::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 0 2px;
+  top: 3px
+}
+
+.ri-bot::before {
+  left: -4px;
+  border-radius: 3px
+}
+
+.ri-bot::after {
+  border-radius: 100px;
+  right: -4px
+}
+
+.ri-calculator {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 18px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 2px
+}
+
+.ri-calculator::after,
+.ri-calculator::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  top: 2px;
+  left: 2px
+}
+
+.ri-calculator::after {
+  width: 2px;
+  box-shadow: 4px 0 0, 8px 0 0, 0 4px 0, 4px 4px 0, 8px 4px 0, 0 8px 0, 4px 8px 0, 8px 8px 0, 8px 6px 0;
+  top: 6px
+}
+
+.ri-check-o {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 100px
+}
+
+.ri-check-o::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 6px;
+  height: 10px;
+  border-color: currentColor;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg)
+}
+
+.ri-check {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px
+}
+
+.ri-check::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 6px;
+  height: 10px;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg)
+}
+
+.ri-close-r {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 4px
+}
+
+.ri-close-r::after,
+.ri-close-r::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+  border-radius: 5px;
+  top: 8px;
+  left: 3px
+}
+
+.ri-close-r::after {
+  transform: rotate(-45deg)
+}
+
+.ri-close {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 40px
+}
+
+.ri-close::after,
+.ri-close::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+  border-radius: 5px;
+  top: 8px;
+  left: 1px
+}
+
+.ri-close::after {
+  transform: rotate(-45deg)
+}
+
+.ri-comment {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 20px;
+  height: 16px;
+  border: 2px solid;
+  border-bottom: 0;
+  box-shadow: -6px 8px 0 -6px, 6px 8px 0 -6px
+}
+
+.ri-comment::after,
+.ri-comment::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px
+}
+
+.ri-comment::before {
+  border: 2px solid;
+  border-top-color: transparent;
+  border-bottom-left-radius: 20px;
+  right: 4px;
+  bottom: -6px;
+  height: 6px
+}
+
+.ri-comment::after {
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 4px 0 0;
+  left: 4px;
+  top: 4px
+}
+
+.ri-dialpad {
+  transform: scale(var(--ris, 1));
+}
+
+.ri-dialpad,
+.ri-dialpad::before {
+  box-shadow: -5px 0 0, 5px 0 0
+}
+
+.ri-dialpad,
+.ri-dialpad::after,
+.ri-dialpad::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 3px;
+  height: 3px;
+  background: currentColor
+}
+
+.ri-dialpad::after,
+.ri-dialpad::before {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.ri-dialpad::before {
+  bottom: 5px
+}
+
+.ri-dialpad::after {
+  box-shadow: -5px 0 0, 5px 0 0, 0 5px 0;
+  top: 5px
+}
+
+.ri-display-grid {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  height: 14px;
+  width: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px
+}
+
+.ri-display-grid::after,
+.ri-display-grid::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 4px;
+  border-right: 4px solid;
+  border-left: 4px solid;
+  top: 0;
+  left: 0
+}
+
+.ri-display-grid::before {
+  top: 6px
+}
+
+.ri-gift {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 22px;
+  height: 14px;
+  margin-top: 8px;
+  border: 2px solid transparent;
+  box-shadow: inset 2px 0 0, inset -2px 0 0, 0 -2px 0, inset 0 2px 0, inset 0 -2px 0;
+  background: linear-gradient(to left, currentColor 10px, transparent 0), linear-gradient(to left, currentColor 10px, transparent 0), linear-gradient(to left, currentColor 10px, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 2px 10px, 2px 10px, 2px 10px;
+  background-position: 8px 0, 18px -8px, -2px -8px
+}
+
+.ri-gift::after,
+.ri-gift::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 6px;
+  height: 8px;
+  border: 2px solid;
+  top: -10px
+}
+
+.ri-gift::after {
+  left: 3px;
+  transform: rotate(-45deg)
+}
+
+.ri-gift::before {
+  right: 3px;
+  transform: rotate(45deg)
+}
+
+.ri-heart,
+.ri-heart::after {
+  border: 2px solid;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  width: 10px;
+  height: 8px;
+  border-bottom: 0
+}
+
+.ri-heart {
+  box-sizing: border-box;
+  position: relative;
+  transform: translate(calc(-10px / 2 * var(--ris, 1)), calc(-6px / 2 * var(--ris, 1)))rotate(-45deg)scale(var(--ris, 1));
+  display: block
+}
+
+.ri-heart::after,
+.ri-heart::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+}
+
+.ri-heart::after {
+  right: -9px;
+  transform: rotate(90deg);
+  top: 5px
+}
+
+.ri-heart::before {
+  width: 11px;
+  height: 11px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  left: -2px;
+  top: 3px
+}
+
+@keyframes loadbaralt {
+  0%,
+  to {
+    left: 0;
+    right: 80%
+  }
+  25%,
+  75% {
+    left: 0;
+    right: 0
+  }
+  50% {
+    left: 80%;
+    right: 0
+  }
+}
+
+.ri-loadbar-alt,
+.ri-loadbar-alt::before,
+.ri-loadbar-alt::after {
+  display: block;
+  box-sizing: border-box;
+  height: 4px;
+  border-radius: 4px
+}
+
+.ri-loadbar-alt {
+  position: relative;
+  transform: scale(var(--ris, 1));
+  width: 18px
+}
+
+.ri-loadbar-alt::after,
+.ri-loadbar-alt::before {
+  background: currentColor;
+  content: "";
+  position: absolute
+}
+
+.ri-loadbar-alt::before {
+  animation: loadbaralt 2s cubic-bezier(0, 0, .58, 1) infinite
+}
+
+.ri-loadbar-alt::after {
+  width: 18px;
+  opacity: .3
+}
+
+@keyframes ri-doc {
+  0% {
+    left: -16px
+  }
+  60%,
+  to {
+    left: 0
+  }
+}
+
+.ri-loadbar-doc {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  transform: scale(var(--ris, 1));
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px;
+  border-radius: 1px;
+  width: 12px;
+  height: 14px;
+  overflow: hidden
+}
+
+.ri-loadbar-doc::after,
+.ri-loadbar-doc::before {
+  content: "";
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  height: 2px;
+  background: currentColor;
+  animation: ri-doc 1s linear infinite alternate
+}
+
+.ri-loadbar-doc::before {
+  width: 14px;
+  box-shadow: -4px 4px 0
+}
+
+.ri-loadbar-doc::after {
+  width: 5px;
+  top: 8px
+}
+
+.ri-math-minus {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 10px
+}
+
+.ri-math-percent {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: rotate(-45deg) scale(var(--ris, 1));
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 20px
+}
+
+.ri-math-percent::after,
+.ri-math-percent::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 20px;
+  top: -7px;
+  left: 6px
+}
+
+.ri-math-percent::after {
+  top: 5px
+}
+
+.ri-math-plus,
+.ri-math-plus::after {
+  display: block;
+  box-sizing: border-box;
+  background: currentColor;
+  border-radius: 10px
+}
+
+.ri-math-plus {
+  margin-top: -2px;
+  position: relative;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 2px
+}
+
+.ri-math-plus::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  top: -7px;
+  left: 7px
+}
+
+.ri-more-alt {
+  transform: scale(var(--ris, 1))
+}
+
+.ri-more-alt,
+.ri-more-alt::after,
+.ri-more-alt::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 100%
+}
+
+.ri-more-alt::after,
+.ri-more-alt::before {
+  content: "";
+  position: absolute;
+  top: 0
+}
+
+.ri-more-alt::after {
+  left: -6px
+}
+
+.ri-more-alt::before {
+  right: -6px
+}
+
+.ri-more-vertical-alt {
+  transform: scale(var(--ris, 1))
+}
+
+.ri-more-vertical-alt,
+.ri-more-vertical-alt::after,
+.ri-more-vertical-alt::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 100%
+}
+
+.ri-more-vertical-alt::after,
+.ri-more-vertical-alt::before {
+  content: "";
+  position: absolute
+}
+
+.ri-more-vertical-alt::after {
+  left: 0;
+  top: 6px
+}
+
+.ri-more-vertical-alt::before {
+  top: -6px;
+  right: 0
+}
+
+.ri-mouse {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 24px;
+  border: 2px solid;
+  border-radius: 10px
+}
+
+.ri-mouse::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  top: 3px;
+  left: 5px
+}
+
+.ri-pin {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: rotate(45deg) scale(var(--ris, 1));
+  width: 18px;
+  height: 18px;
+  border-radius: 100% 100% 0 100%;
+  border: 2px solid;
+  margin-top: -4px
+}
+
+.ri-pin::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid;
+  top: 3px;
+  left: 3px;
+  border-radius: 40px
+}
+
+.ri-play-list-search {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 12px;
+  height: 6px;
+  border-top: 0 solid transparent;
+  border-bottom: 2px solid transparent;
+  box-shadow: inset 0 -2px 0, -2px 4px 0 -2px, 0 -2px 0 0
+}
+
+.ri-play-list-search::after,
+.ri-play-list-search::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: -7px
+}
+
+.ri-play-list-search::after {
+  width: 3px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+  right: -4px
+}
+
+.ri-play-list-search::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 4px;
+  border: 2px solid;
+  right: -3px
+}
+
+.ri-search-found {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px
+}
+
+.ri-search-found::after,
+.ri-search-found::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+}
+
+.ri-search-found::after {
+  border-radius: 3px;
+  width: 2px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 12px
+}
+
+.ri-search-found::before {
+  width: 6px;
+  height: 4px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-40deg);
+  top: 3px;
+  left: 3px
+}
+
+.ri-search-loading {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px
+}
+
+.ri-search-loading::after,
+.ri-search-loading::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 2px;
+  background: currentColor
+}
+
+.ri-search-loading::after {
+  border-radius: 3px;
+  height: 8px;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 12px
+}
+
+.ri-search-loading::before {
+  height: 2px;
+  border-radius: 100%;
+  top: 5px;
+  left: 5px;
+  box-shadow: -3px 0 0, 3px 0 0
+}
+
+.ri-search {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px
+}
+
+.ri-search::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 12px
+}
+
+.ri-share {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 100px;
+  box-shadow: 10px -6px 0, 10px 6px 0
+}
+
+.ri-share::after,
+.ri-share::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  left: 2px
+}
+
+.ri-share::before {
+  top: 0;
+  transform: rotate(-35deg)
+}
+
+.ri-share::after {
+  bottom: 0;
+  transform: rotate(35deg)
+}
+
+
+
+.ri-smartphone-shake {
+  background: linear-gradient(to left, currentColor 5px, transparent 0)no-repeat 4px 12px/2px 2px;
+  box-sizing: border-box;
+  position: relative;
+  transform: scale(var(--ris, 1));
+  display: block;
+  width: 14px;
+  height: 20px;
+  border: 2px solid;
+  border-radius: 2px
+}
+
+.ri-smartphone-shake::after,
+.ri-smartphone-shake::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  height: 10px;
+  width: 6px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  box-shadow: 2px 0 0, inset -2px 0 0;
+  top: 3px;
+  left: -12px
+}
+
+.ri-smartphone-shake::after {
+  transform: scaleX(-1);
+  left: 16px
+}
+
+.ri-sort-az,
+.ri-sort-az::after,
+.ri-sort-az::before {
+  display: block;
+  box-sizing: border-box;
+  height: 2px;
+  border-radius: 4px;
+  background: currentColor
+}
+
+.ri-sort-az {
+  position: relative;
+  transform: scale(var(--ris, 1));
+  width: 8px
+}
+
+.ri-sort-az::after,
+.ri-sort-az::before {
+  content: "";
+  position: absolute
+}
+
+.ri-sort-az::before {
+  width: 12px;
+  top: -4px;
+  left: -2px
+}
+
+.ri-sort-az::after {
+  width: 4px;
+  top: 4px;
+  left: 2px
+}
+
+.ri-sort-za,
+.ri-sort-za::after,
+.ri-sort-za::before {
+  display: block;
+  box-sizing: border-box;
+  height: 2px;
+  border-radius: 4px;
+  background: currentColor
+}
+
+.ri-sort-za {
+  position: relative;
+  transform: scale(var(--ris, 1));
+  width: 8px
+}
+
+.ri-sort-za::after,
+.ri-sort-za::before {
+  content: "";
+  position: absolute
+}
+
+.ri-sort-za::before {
+  width: 12px;
+  top: 4px;
+  left: -2px
+}
+
+.ri-sort-za::after {
+  width: 4px;
+  top: -4px;
+  left: 2px
+}
+
+@keyframes spinneralt {
+  0% {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(359deg)
+  }
+}
+
+.ri-spinner-alt {
+  transform: scale(var(--ris, 1))
+}
+
+.ri-spinner-alt,
+.ri-spinner-alt::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px
+}
+
+.ri-spinner-alt::before {
+  content: "";
+  position: absolute;
+  border-radius: 100px;
+  animation: spinneralt 1s cubic-bezier(.6, 0, .4, 1) infinite;
+  border: 3px solid transparent;
+  border-top-color: currentColor
+}
+
+.ri-spinner {
+  transform: scale(var(--ris, 1))
+}
+
+.ri-spinner,
+.ri-spinner::after,
+.ri-spinner::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px
+}
+
+.ri-spinner::after,
+.ri-spinner::before {
+  content: "";
+  position: absolute;
+  border-radius: 100px
+}
+
+.ri-spinner::before {
+  animation: spinner 1s cubic-bezier(.6, 0, .4, 1) infinite;
+  border: 3px solid transparent;
+  border-top-color: currentColor
+}
+
+.ri-spinner::after {
+  border: 3px solid;
+  opacity: .2
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(359deg)
+  }
+}
+
+.ri-time {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ris, 1));
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px currentColor
+}
+
+.ri-time::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  top: 1px;
+  left: 5px
+}
+

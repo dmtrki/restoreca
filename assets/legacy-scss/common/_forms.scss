@@ -1,0 +1,65 @@
+
+input,
+label,
+select,
+button,
+textarea
+{
+	margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	background:none;
+}
+
+/* Remove the stupid outer glow in Webkit */
+input:focus
+{
+	outline:0;
+}
+
+
+@include block(input) {
+  border-radius: 8px;
+  @include padding-vw(13px);
+  
+  @include modifier(prime) {
+		background: $c-light;
+		box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3), -1px -1px 2px rgba(222, 222, 222, 0.5), inset -2px 2px 4px rgba(222, 222, 222, 0.2), inset 2px -2px 4px rgba(222, 222, 222, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.9), inset 2px 2px 5px rgba(222, 222, 222, 0.9);
+  }
+  @include modifier(accent) {
+    background: $bg-dark-second-g;
+    color: $c-light;
+
+    &::placeholder {
+      color: $c-light;
+    }
+  }
+}
+
+@include block(form) {
+	position: relative;
+	@include element(agreement) {
+		@include font-vw(8px);
+		@include up-vw(margin-top,13px);
+		@include padding-vw(8px);
+		opacity: .55;
+		transition: opacity .1s ease-in;
+
+		&:hover {
+			opacity: .89;
+		}
+	}
+}
+
+@include block(field) {
+	
+	@include element(label) {
+	}
+
+	@include element(input) {
+
+	}
+}

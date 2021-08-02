@@ -1,0 +1,54 @@
+$cardPadding: 13px;
+
+@include block(productCard) {
+  position: relative;
+  overflow: hidden;  
+  transition: all .35s;
+  background-color: $bg-light;
+  border: 1px solid #F5F5F5;
+  display: block;
+  text-decoration: none;
+  @include vw(padding, $cardPadding);
+
+  @include element(thumb) {
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  @include element(info) {
+    text-decoration: none;
+  }
+
+  @include element(title) {
+    text-decoration: none;
+    font-size: 1em;
+    color: $c-main;
+
+    &:hover {
+      color: lighten($c-main, 21);
+      text-decoration: none;
+    }
+  }
+
+  @include element(description) {
+    font-size: .8em;
+    color: lighten($c-main, 34);
+    text-decoration: none;
+
+    &:hover {
+      color: lighten($c-main, 34);
+      text-decoration: none;
+    }
+  }
+
+  
+}
+
+@media screen and (max-width: $breakpoint-desktop - 1) {
+  @include block(productCard) {
+    @include vmin(padding, $cardPadding);
+  }
+  
+}

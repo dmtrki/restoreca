@@ -1,0 +1,14 @@
+@import '~watson-scss';
+
+@import '~~assets/legacy-scss/global/vars/base',
+        '~~assets/legacy-scss/global/vars/colors',
+        '~~assets/legacy-scss/global/vars/sizes',
+        '~~assets/legacy-scss/global/functions',
+        '~~assets/legacy-scss/global/keyframes',
+        '~~assets/legacy-scss/global/mixins/animation',
+        '~~assets/legacy-scss/global/mixins/card',
+        '~~assets/legacy-scss/global/mixins/decoration',
+        '~~assets/legacy-scss/global/mixins/grid',
+        '~~assets/legacy-scss/global/mixins/sizing',
+        '~~assets/legacy-scss/global/mixins/typography',
+        '~~assets/legacy-scss/global/mixins/fallback';
