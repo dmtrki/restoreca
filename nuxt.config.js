@@ -1,3 +1,5 @@
+const { basename } = require('path');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -14,19 +16,22 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'vant/lib/index.css'
+    '@/assets/scss/common.scss',
+    'vant/lib/index.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // '@/plugins/vant',
     '@/plugins/rusEndings',
+    '@/plugins/horizontal',
+    '@/plugins/gqlr',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     { path: '~/components/', pathPrefix: false, prefix: 're' },
-    { path: '~/components/mmm/', pathPrefix: false, prefix: 'mmm'}
+    { path: '~/components/mmm/', pathPrefix: false, prefix: 'mmm'},
+    { path: '~/components/vant/', pathPrefix: false, prefix: 'va'},
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -52,7 +57,7 @@ export default {
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
     // https://github.com/nuxt-community/device-module
@@ -65,16 +70,18 @@ export default {
     // https://github.com/nuxt-community/router-module
     '@nuxtjs/router',
     // https://tailwindcss.nuxtjs.org/setup
-    '@nuxtjs/tailwindcss'
+    // '@nuxtjs/tailwindcss' ::: решил убрать за ненадобностью, вместо нее вьютифи
+    // https://github.com/nuxt-community/vuetify-module
+    '@nuxtjs/vuetify',
   ],
 
   styleResources: {
     scss: [
       'watson-scss',
-      '@/assets/legacy-scss/global.scss',
       '@/assets/scss/global.scss',
     ],
     less: [],
+    hoistUseStatements: true  // Hoists the "@use" imports. Applies only to "sass", "scss" and "less". Default: false.
   },
 
   graphql: {
@@ -85,8 +92,22 @@ export default {
     },
   },
 
-  tailwindcss: {
-    // cssPath: '~/assets/vendor/tailwind.scss'
+
+  routerModule: {
+    path: './services/'
+  },
+
+  vuetify: { 
+    customVariables: ['~/assets/vendor/vuetify.scss'],
+    defaultAssets: {
+      font: {
+        family: 'Montserrat' 
+      },
+      icons: {
+        iconfont: 'mdiSvg',
+      },
+    },
+    treeShake: true, 
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -94,7 +115,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://github.com/blokwise/dynamic
-    '@blokwise/dynamic'
+    '@blokwise/dynamic',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -111,28 +132,60 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/vant.*?less/],
+    // transpile: [/vant.*?less/],
+    transpile: [
+      'horizontal'
+    ],
     babel: {
       plugins: [
         '@babel/plugin-proposal-optional-chaining',
-        [
-          'import',
-          {
-            libraryName: 'vant',
-            libraryDirectory: 'es',
-            style: (name) => `${name}/style/less`,
-          },
-          'vant'
-        ]
+        // [
+        //   'import',
+        //   {
+        //     libraryName: 'vant',
+        //     libraryDirectory: 'es',
+        //     style: false
+        //     // style: (name) => true,
+        //     // style: (name) => `${name}/style/less`,
+        //   },
+        //   'vant'
+        // ]
       ]
     },
     loaders: {
-      less: {
-        javascriptEnabled: true, // Enable Less inline JavaScript support
-        modifyVars: {
-          hack: `true; @import "./assets/vendor/vant.less";`
-        }
-      }
+      // less: {
+      //   javascriptEnabled: true, // Enable Less inline JavaScript support
+      //   modifyVars: {
+      //     hack: `true; @import "./assets/vendor/vant.less";`
+      //   }
+      // }
+    },
+    extend: (config) => {
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'vue-svg-loader',
+            options: {
+              svgo: {
+                plugins: [
+                  {
+                    prefixIds: {
+                      prefix: (node, { path }) => basename(path, '.svg'),
+                      delim: '-',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      });
     },
     /*
     postcss: {

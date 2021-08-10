@@ -1,5 +1,5 @@
 <template>
-  <MmmAd component="homeHeader" :component-data="headerData" />
+  <MmmAd component-name="HomeHeader" :component-data="headerData" />
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -13,13 +13,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['commonData','catalogDropdownData']),
-    manufacturersMore() {
-      if ( this.home.manufacturers.count !== null ) {
-        return this.home.manufacturers.count + ' ' + this.$rusEndings(this.home.manufacturers.count, ['производитель', 'производителя', 'производителей'])
-      }
-      return 0;
-    }
+    // ...mapState(['commonData','catalogDropdownData']),
   },
   methods: {
     

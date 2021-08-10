@@ -19,12 +19,8 @@
 </template>
 
 <script>
-import VueHorizontal from "vue-horizontal"
 
 export default {
-  components: {
-    VueHorizontal
-  },
   props: {
     type: {
       type: String,
@@ -57,9 +53,9 @@ export default {
   },
   computed: {
     classList() {
-      let classes = 'horizontal'
+      let classes = 'mmmHorizontal'
 
-      if (this.offsetTop) classes += ' horizontal--offsetTop_' + this.offsetTop
+      if (this.offsetTop) classes += ' mmmHorizontal--offsetTop_' + this.offsetTop
 
       return classes
     }

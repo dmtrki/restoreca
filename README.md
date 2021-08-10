@@ -12,7 +12,14 @@
 - https://css-tricks.com/how-to-make-localstorage-reactive-in-vue/
 - https://css-tricks.com/how-the-vue-composition-api-replaces-vue-mixins/
 - https://css-tricks.com/building-renderless-vue-components/
+- https://core-player.github.io/vue-core-video-player/
 - https://css-tricks.com/the-power-of-named-transitions-in-vue
+- https://docs.unlayer.com/docs/vue-component
+- https://codepen.io/whoistobias/pen/yLNgjwy
+
+- оформление закзаа
+  - https://koumoul-dev.github.io/vuetify-jsonschema-form/latest/examples#basic
+  - https://wotamann.gitbook.io/vuetify-form-base/
 
 - https://github.com/daxter-army/daxUI
 
