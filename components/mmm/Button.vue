@@ -24,6 +24,18 @@ export default {
       type: Boolean,
       defailt: false
     },
+    gradient: {
+      type: Boolean,
+      default: false
+    },
+    rounded: {
+      type: Boolean,
+      default: false
+    },
+    onDark: {
+      type: Boolean,
+      default: false
+    },
     icon: {
       type: Boolean | String,
       default: false
@@ -52,7 +64,9 @@ export default {
       let classList = this.classListBase ?? []
 
       if (this.outline) classList.push(`${this.classRoot}--${this.themed}_outline`)
-      if (this.offsetX !== 0) classList.push(`${this.classRoot}--offsetX_${this.offsetX}`)
+      if (this.gradient) classList.push(`${this.classRoot}--${this.themed}_gradient`)
+      if (this.rounded) classList.push(`${this.classRoot}--rounded`)
+      if (this.onDark) classList.push('is-onDark')
 
       return classList.join(' ')
     },
@@ -86,6 +100,47 @@ export default {
       display: inline-block;
     }
 
+    /* *** MODIFIERS *** */
+
+    //#  size
+
+    &--smallest {
+      @include vmin(padding-top, 5px);
+      @include vmin(padding-bottom, 5px);
+      @include vmin(padding-left, 8px);
+      @include vmin(padding-right, 8px);
+      @include mfs(8px);
+      border-radius: 5px;
+
+      #{$this}__icon {
+        &--left {
+          margin-right: 3px;
+        }
+        &--right {
+          margin-left: 3px;
+        }
+      }
+    }
+
+    &--xsmall {
+      @include vmin(padding-top, 5px);
+      @include vmin(padding-bottom, 5px);
+      @include vmin(padding-left, 8px);
+      @include vmin(padding-right, 8px);
+      @include mfs(12px);
+      font-weight: 500;
+      border-radius: 8px;
+
+      #{$this}__icon {
+        &--left {
+          margin-right: 8px;
+        }
+        &--right {
+          margin-left: 8px;
+        }
+      }
+    }
+
     &--small {
       
       @include vmin(padding-top, 8px);
@@ -103,25 +158,7 @@ export default {
       }
     }
 
-    &--xsmall {
-      @include vmin(padding-top, 5px);
-      @include vmin(padding-bottom, 5px);
-      @include vmin(padding-left, 8px);
-      @include vmin(padding-right, 8px);
-      font-size: 12px;
-      font-weight: 500;
-      border-radius: 8px;
-
-      #{$this}__icon {
-        &--left {
-          margin-right: 8px;
-        }
-        &--right {
-          margin-left: 8px;
-        }
-      }
-    }
-
+    //#  theme
     &--primary {
       background-color: $primary;
       color: $light;
@@ -148,6 +185,42 @@ export default {
       color: $light;
     }
 
+    &--accent {
+      background-color: $accent;
+      color: $light;
+
+      &:hover {
+        background-color: $light;
+        color: $primary;
+      }
+
+      &_outline {
+        background-color: transparent;
+        border-color: $primary;
+        color: $primary;
+
+        &:hover {
+          background-color: $primary;
+          color: $light;
+        }
+      }
+
+      &_gradient {
+        background: linear-gradient(264.23deg, #FF8744 -1.51%, #4F038A 80.62%);
+        color: $light;
+      }
+    }
+
+    &--link {
+      font-weight: 600;
+      color: $link;
+
+      &.is-onDark {
+        color: $light;
+      }
+    }
+
+    // layout
     &--offsetX {
       &_1 {
         @include vmin(margin-right, 13px);

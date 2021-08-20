@@ -25,7 +25,9 @@ export default {
     '@/plugins/rusEndings',
     '@/plugins/horizontal',
     '@/plugins/gqlr',
+    { src: '~plugins/touch', ssr: false }
   ],
+  
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -97,25 +99,25 @@ export default {
     path: './services/'
   },
 
-  vuetify: { 
-    customVariables: ['~/assets/vendor/vuetify.scss'],
-    defaultAssets: {
-      font: {
-        family: 'Montserrat' 
-      },
-      icons: {
-        iconfont: 'mdiSvg',
-      },
-    },
-    treeShake: true, 
-  },
+  // vuetify: { 
+  //   customVariables: ['~/assets/vendor/vuetify.scss'],
+  //   defaultAssets: {
+  //     font: {
+  //       family: 'Montserrat' 
+  //     },
+  //     icons: {
+  //       iconfont: 'mdiSvg',
+  //     },
+  //   },
+  //   treeShake: true, 
+  // },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://github.com/blokwise/dynamic
-    '@blokwise/dynamic',
+    '@blokwise/dynamic'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -160,7 +162,12 @@ export default {
       //   }
       // }
     },
-    extend: (config) => {
+    extend: (config, ctx) => {
+      // touch ssr
+      // if (ctx.isServer) {
+      //   config.resolve.alias['hammerjs$'] = this.options.rootDir + 'node_modules/vue-touch/dist/hammer-ssr.js'
+      // }
+      
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/;

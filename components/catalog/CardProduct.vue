@@ -22,7 +22,7 @@ export default {
     },
     hydration: {
       type: String,
-      default: 'WhenIdle'
+      default: 'WhenVisible'
     },
     componentData: {
       type: Object | Array | String | Boolean | Number,

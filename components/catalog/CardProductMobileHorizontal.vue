@@ -1,30 +1,39 @@
 <template>
   <div class="productCardHorizontal">
-    <div class="productCardHorizontal__thumb" :style="`background-image: url(${thumb});`">
+    <div
+      class="productCardHorizontal__thumb"
+      :style="`background-image: url(${thumb});`"
+      v-touch:longtap="addToFavorites"
+      v-touch-class="'is-touched'"
+      @click="goToProduct"
+    >
       <ul class="productCardHorizontal__labels">
         <li class="productCardHorizontal__label"></li>
       </ul>
     </div>
     <div class="productCardHorizontal__info">
       <div class="productCardHorizontal__main">
-        <div class="productCardHorizontal__title">
+        <NuxtLink :to="`/product/${uuid}`" class="productCardHorizontal__title">
           {{ title }}
-        </div>
+        </NuxtLink>
         <ul class="productCardHorizontal__tags">
 
         </ul>
+        <div class="productCardHorizontal__description" @click="goToProduct">
+          {{ description_cutted }}
+        </div>
       </div>
       <div class="productCardHorizontal__side">
-        <div v-if="!discounted" class="productCardHorizontal__price">
+        <div v-if="!discounted" class="productCardHorizontal__price" @click="goToProduct">
           {{ price_formatted }}
         </div>
-        <div v-else class="productCardHorizontal__price_discounted">
+        <div v-else class="productCardHorizontal__price_discounted" @click="goToProduct">
           <div class="productCardHorizontal__price_discount"></div>
           <div class="productCardHorizontal__price_actual"></div>
           <div class="productCardHorizontal__price_origin"></div>
         </div>
         <div class="productCardHorizontal__actions">
-
+          <ReButtonAddToCart :uuid="uuid" />
         </div>
       </div>
     </div>
@@ -46,6 +55,10 @@ export default {
       type: String | Number,
       required: true
     },
+    uuid: {
+      type: String,
+      required: true
+    },
     slug: {
       type: String,
       required: true
@@ -59,8 +72,12 @@ export default {
       default: () => []
     },
     description: {
-      type: String,
-      required: false
+      type: String | Array,
+      default: ''
+    },
+    description_cutted: {
+      type: String | Array,
+      default: ''
     },
     price: {
       type: String,
@@ -78,6 +95,19 @@ export default {
       type: Object,
       default: () => {}
     }
+  },
+  computed: {
+    descriptionFormatted() {
+      return (typeof this.description === 'array') ? this.description[0] : this.description
+    }
+  },
+  methods: {
+    addToFavorites() {
+      console.log('added to favs')
+    },
+    goToProduct() {
+      this.$router.push('/product/' + this.uuid)
+    }
   }
 }
 </script>
@@ -86,7 +116,7 @@ export default {
   @include block(productCardHorizontal) {
     @include padding-vmin(13px);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     cursor: pointer;
 
 
@@ -98,13 +128,31 @@ export default {
     }
 
     @include element(info) {
-      @include padding-vw(13px, 13px, 8px, 21px);
-      @include flex-centered;
+      @include vmin(padding-top, 5px);
+      @include vmin(padding-bottom, 5px);
+      @include vmin(padding-left, 5px);
+      @include vmin(padding-right, 5px);
+      flex: 1;
+      display: flex;
       flex-direction: column;
     }
 
+      @include element(title) {
+        @include mfs(12px);
+        color: $main;
+      }
+
+      @include element(description) {
+        color: $info;
+        @include mfs(10px);
+      }
+
     @include element(side) {
       @include flex-centered-between;
+    }
+
+    @include element(price) {
+      color: $primary;
     }
   }
 </style>

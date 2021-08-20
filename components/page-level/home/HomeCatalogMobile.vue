@@ -64,6 +64,8 @@ export default {
   },
   components: {
     Cell, CellGroup, Grid, GridItem
+  },
+  mounted() {
   }
 }
 </script>

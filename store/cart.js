@@ -1,42 +1,39 @@
 export const state = () => ({
-  version: 0.2,
-  products: [], // product { qty, productId }
+  version: 0.1,
+  items: [],
   count: 0 ,
-  delivery: '',
-  deliveryData: '',
-  payment: '',
+  delivery: {
+    type: '',
+    address_uuid: ''
+  },
+  payment: {
+    type: ''
+  },
   addresses: [],
-  addedSnackbar: false
+  added: false
 })
 export const mutations = {
-  ADD_PRODUCT (state, productId) {
-    if (!state.products.find(p => productId === p.productId)) {
-      state.products = [...state.products, { productId: productId, qty: 1 }]
+  ADD_PRODUCT (state, uuid) {
+    if (!state.items.find(p => uuid === p.uuid)) {
+      state.items = [...state.items, { uuid: uuid, qty: 1 }]
     }
   },
-  SHOW_ADDED_SNACKBAR (state) {
-    state.addedSnackbar = true
+  REMOVE_PRODUCT (state, uuid) {
+    state.items = Array.from(state.items.filter(prod => prod.uuid !== uuid))
   },
-  HIDE_ADDED_SNACKBAR (state) {
-    state.addedSnackbar = false
-  },
-  REMOVE_PRODUCT (state, productId) {
-    state.products = Array.from(state.products.filter(prod => prod.productId !== productId))
-  },
-  SET_PRODUCT_QTY (state, { productId, qty }) {
-    state.products = [
-      ...state.products.filter(prod => prod.productId !== productId),
-      { ...state.products.find(prod => prod.productId === productId), qty }
+  SET_PRODUCT_QTY (state, { uuid, qty }) {
+    state.items = [
+      ...state.items.filter(prod => prod.uuid !== uuid),
+      { ...state.items.find(prod => prod.uuid === uuid), qty }
     ]
   },
-  CALC_PRODUCTS_QUANTITY (state) {
+  CALC_ITEMS_QUANTITY (state) {
     let counter = 0
-    state.products.forEach(item => {
+    state.items.forEach(item => {
       counter = counter + item.qty
     });
     state.count = counter
-  },
-  
+  },  
   SET_DELIVERY (state, payload) {
     state.delivery = payload.deliveryType
   },
@@ -48,26 +45,17 @@ export const mutations = {
   },
 }
 export const getters = {
-  products: (state) => state.products,
-  delivery: (state) => state.delivery,
-  deliveryData: (state) => state.deliveryData,
-  payment: (state) => state.payment,  
-  addedSnackbar: (state) => state.addedSnackbar,
 }
 export const actions = {
-  async addProduct ({ commit }, productId) {
-    await commit('ADD_PRODUCT', productId)
-    await commit('CALC_PRODUCTS_QUANTITY')
-  },  
-  async toggleAddedSnackbar ({ commit }) {
-    await commit('HIDE_ADDED_SNACKBAR')
-    await commit('SHOW_ADDED_SNACKBAR')
+  async add ({ commit }, uuid) {
+    await commit('ADD_PRODUCT', uuid)
+    await commit('CALC_ITEMS_QUANTITY')
   },
-  async removeProduct ({ commit }, productId) {
-    await commit('REMOVE_PRODUCT', productId)
+  async remove ({ commit }, uuid) {
+    await commit('REMOVE_PRODUCT', uuid)
   },
-  async setProductQuantity ({ commit }, { productId, qty }) {
-    await commit('SET_PRODUCT_QTY', { productId, qty })
+  async setQuantity ({ commit }, { uuid, qty }) {
+    await commit('SET_PRODUCT_QTY', { uuid, qty })
   },
   async setDelivery ({ commit }, deliveryType) {
     await commit('SET_DELIVERY', deliveryType)

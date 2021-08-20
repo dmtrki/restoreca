@@ -18,6 +18,7 @@ export default {
     },
     firstSection: _bdf,
     fullWidth: _bdf,
+    flex: _bdf,
     transparent: _bdf,
     accent: _bdf,
     light: _bdt,
@@ -33,6 +34,7 @@ export default {
       let classList = [t]
 
       if (this.fullWidth) classList.push(t + '--fullWidth')
+      if (this.flex) classList.push(t + '--flex')
       if (this.transparent) classList.push(t + '--transparent')
       
       if (this.offsetT) classList.push(t + '--offsetT_' + this.offsetT)
@@ -53,9 +55,17 @@ export default {
 <style lang="scss">
 @include block(mmmSection) {
   width: 100%;
+  max-width: 100%;
   padding-left: 21px;
   padding-right: 21px;
   @include vmin(margin-top, 21px);
+
+  @include element(box) {
+    @include vmin(padding, 8px);
+    border-radius: 13px;
+    background-color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  }
 
   @include modifier(offsetT) {
     &_xsmall {
@@ -78,13 +88,6 @@ export default {
   @include modifier(fullWidth) {
     padding-left: 0;
     padding-right: 0;
-  }
-
-  @include element(box) {
-    @include vmin(padding, 8px);
-    border-radius: 13px;
-    background-color: #fff;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
   }
 
   @include modifier(transparent) {
@@ -111,6 +114,15 @@ export default {
       // @include vmin(padding-right, 13px);
       @include vmin(padding-top, 13px);
       @include vmin(padding-bottom, 34px);
+    }
+  }
+
+  @include modifier(flex) {
+
+    @include element(box) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 }

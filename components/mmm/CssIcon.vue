@@ -24,17 +24,26 @@ export default {
   },
   computed: {
     iconClass() {
-      if (this.type === 'phone') return 'gg-smartphone-shake'
-      if (this.type === 'filters') return 'gg-filters'
-      if (this.type === 'sort') return 'gg-sort-za'
-      if (this.type === 'next') return 'gg-next'
-      if (this.type === 'prev') return 'gg-prev'
-      if (this.type === 'search') return 'gg-search'
-      if (this.type === 'catalog') return 'gg-list-search'
-      if (this.type === 'feed') return 'gg-feed'
-      if (this.type === 'menu') return 'gg-menu'
-      if (this.type === 'cart') return 'gg-shopping-cart'
-      
+      const typeToClass = {
+        'phone': 'gg-smartphone-shake',
+        'filters': 'gg-filters',
+        'sort': 'gg-sort-za',
+        'next': 'gg-next',
+        'prev': 'gg-prev',
+        'search': 'gg-search',
+        'catalog': 'gg-list-search',
+        'feed': 'gg-feed',
+        'menu': 'gg-menu',
+        'cart': 'gg-shopping-cart',
+        'arrow-left': 'gg-arrow-left',
+        'arrow-right': 'gg-arrow-right',
+        'arrow-long-up': 'gg-arrow-long-up',
+        'film': 'gg-film',
+        'gift': 'gg-gift',
+        'check': 'gg-check',
+        'enter': 'gg-enter',
+      }
+      return (typeToClass[this.type]) ? typeToClass[this.type] : false      
     },
     classList() {
       let classList = [this.iconClass]
@@ -55,7 +64,17 @@ export default {
   &--xsmall {
     --ggs: 0.8;
   }
+  &--smallest {
+    --ggs: 0.5;
+
+    &.gg-next {
+      &::after {
+        top: 2px;
+      }
+    }
+  }
 }
+
 .gg-smartphone-shake {
   background:
       linear-gradient(to left,
@@ -449,5 +468,268 @@ export default {
  width: 4px;
  top: -4px;
  left: 2px
+}
+
+// *** 
+ .gg-arrow-long-up {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ border-right: 2px solid transparent;
+ border-left: 2px solid transparent;
+ border-bottom: 4px solid transparent;
+ box-shadow: inset 0 0 0 2px;
+ height: 24px;
+ width: 6px
+}
+
+.gg-arrow-long-up::after,
+.gg-arrow-long-up::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute
+}
+
+.gg-arrow-long-up::after {
+ width: 6px;
+ height: 6px;
+ border-top: 2px solid;
+ border-left: 2px solid;
+ transform: rotate(45deg);
+ top: 0;
+ left: -2px
+}
+
+.gg-arrow-long-up::before {
+ width: 6px;
+ height: 6px;
+ border: 2px solid;
+ border-radius: 8px;
+ bottom: -4px;
+ left: -2px
+} 
+
+// *** 
+ .gg-arrow-right {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 22px;
+ height: 22px
+}
+
+.gg-arrow-right::after,
+.gg-arrow-right::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ right: 3px
+}
+
+.gg-arrow-right::after {
+ width: 8px;
+ height: 8px;
+ border-top: 2px solid;
+ border-right: 2px solid;
+ transform: rotate(45deg);
+ bottom: 7px
+}
+
+.gg-arrow-right::before {
+ width: 16px;
+ height: 2px;
+ bottom: 10px;
+ background: currentColor
+} 
+
+// *** 
+ .gg-arrow-left {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 22px;
+ height: 22px
+}
+
+.gg-arrow-left::after,
+.gg-arrow-left::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ left: 3px
+}
+
+.gg-arrow-left::after {
+ width: 8px;
+ height: 8px;
+ border-bottom: 2px solid;
+ border-left: 2px solid;
+ transform: rotate(45deg);
+ bottom: 7px
+}
+
+.gg-arrow-left::before {
+ width: 16px;
+ height: 2px;
+ bottom: 10px;
+ background: currentColor
+} 
+
+// *** 
+ .gg-film,
+.gg-film::after {
+ display: block;
+ box-sizing: border-box;
+ border-radius: 3px
+}
+
+.gg-film {
+ border: 2px solid;
+ position: relative;
+ transform: scale(var(--ggs,1));
+ width: 22px;
+ height: 18px
+}
+
+.gg-film::after {
+ content: "";
+ position: absolute;
+ width: 2px;
+ height: 2px;
+ background: currentColor;
+ left: 2px;
+ top: 2px;
+ box-shadow:
+ 0 4px 0,
+ 0 8px 0,
+ 12px 0 0,
+ 12px 4px 0,
+ 12px 8px 0
+} 
+
+// *** 
+ .gg-gift {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 22px;
+ height: 14px;
+ margin-top: 8px;
+ border: 2px solid transparent;
+ box-shadow:
+ inset 2px 0 0,
+ inset -2px 0 0,
+ 0 -2px 0,
+ inset 0 2px 0,
+ inset 0 -2px 0;
+ background:
+ linear-gradient(to left,
+ currentColor 10px,transparent 0),
+ linear-gradient(to left,
+ currentColor 10px,transparent 0),
+ linear-gradient(to left,
+ currentColor 10px,transparent 0);
+ background-repeat: no-repeat;
+ background-size:
+ 2px 10px,2px 10px,2px 10px;
+ background-position:
+ 8px 0,18px -8px,-2px -8px
+}
+
+.gg-gift::after,
+.gg-gift::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ border-radius: 3px;
+ width: 6px;
+ height: 8px;
+ border: 2px solid;
+ top: -10px
+}
+
+.gg-gift::after {
+ left: 3px;
+ transform: rotate(-45deg)
+}
+
+.gg-gift::before {
+ right: 3px;
+ transform: rotate(45deg)
+}
+
+// *** 
+ .gg-check {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 22px;
+ height: 22px;
+ border: 2px solid transparent;
+ border-radius: 100px
+}
+
+.gg-check::after {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ left: 3px;
+ top: -1px;
+ width: 6px;
+ height: 10px;
+ border-width: 0 2px 2px 0;
+ border-style: solid;
+ transform-origin: bottom left;
+ transform: rotate(45deg)
+}
+
+// *** 
+ .gg-enter {
+ box-sizing: border-box;
+ position: relative;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 16px;
+ height: 18px;
+ border: 2px solid;
+ border-left: 0;
+ box-shadow:
+ -8px -6px 0 -6px,
+ -8px 6px 0 -6px
+}
+
+.gg-enter::after,
+.gg-enter::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ right: 4px
+}
+
+.gg-enter::before {
+ background: currentColor;
+ width: 16px;
+ height: 2px;
+ top: 6px
+}
+
+.gg-enter::after {
+ width: 6px;
+ height: 6px;
+ border-right: 2px solid;
+ border-top: 2px solid;
+ top: 4px;
+ transform: rotate(45deg)
 } 
 </style>

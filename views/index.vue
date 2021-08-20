@@ -19,23 +19,14 @@ export default {
     const query = gql`
       query homepage {
         page(slug: "home") {
-          title,
+          title
           extras
         }
-        productCategories(parent_id: null) {
-          uuid,
-          title,
-          slug,
-          thumb,
-          parent_id
-        }
         manufacturers (limit: 6) {
-          uuid,
-          title,
-          slug,
-          logo {
-            url
-          }
+          uuid
+          title
+          slug
+          thumb
         },
         manufacturersCount
       }
@@ -50,7 +41,6 @@ export default {
         featured: JSON.parse(extras.home_featured)
       },
       catalogData: {
-        categories: response.rootCategories,
         manufacturers: response.manufacturers,
         manufacturersCount: response.manufacturersCount
       }

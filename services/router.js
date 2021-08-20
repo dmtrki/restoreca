@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = () => import('../views/index.vue' /* webpackChunkName: "views/index" */).then((m) => m.default || m),
+      Cart = () => import('../views/cart.vue' /* webpackChunkName: "views/cart" */).then((m) => m.default || m),
       Manufacturers = () => import('../views/manufacturers.vue' /* webpackChunkName: "views/manufacturers" */).then((m) => m.default || m),
       Manufacturer = () => import('../views/manufacturers_slug.vue' /* webpackChunkName: "views/manufacturers" */).then((m) => m.default || m),
       Category = () => import('../views/_category.vue' /* webpackChunkName: "views/category" */).then((m) => m.default || m),
-      CategoryChild = () => import('../views/_category_child.vue' /* webpackChunkName: "views/category" */).then((m) => m.default || m)
+      CategoryChild = () => import('../views/_category_child.vue' /* webpackChunkName: "views/category" */).then((m) => m.default || m),
+      Product = () => import('../views/_product.vue' /* webpackChunkName: "views/product" */).then((m) => m.default || m)
 
 // const Cart = () => import('../pages/cart.vue' /* webpackChunkName: "pages/cart" */)
 // const InfoHome = () => import('../pages/info/index.vue' /* webpackChunkName: "pages/info/index" */)
@@ -29,6 +31,11 @@ export const routerOptions = {
       name: "home"
     },
     {
+      path: "/cart",
+      component: Cart,
+      name: "cart"
+    },
+    {
       path: "/manufacturers",
       component: Manufacturers,
       name: "manufacturers"
@@ -39,15 +46,20 @@ export const routerOptions = {
       name: "manufacturer"
     },
     {
+      path: "/product/:uuid",
+      component: Product,
+      name: "product"
+    },
+    {
       path: "/:slug",
       component: Category,
       name: "category",
     },
     {
-      path: "/:parent/:slug",
+      path: "/:parent/:slug/:child_slug?",
       component: CategoryChild,
       name: "subcategory",
-    },
+    }
   ],
 
   // routes: [{

@@ -1,13 +1,13 @@
 <template>
   <div
       :class="[
-      'bottom-sheet',
-      {
-        opened: opened,
-        closed: opened === false,
-        moving: moving
-      }
-    ]"
+        'bottom-sheet',
+        {
+          opened: opened,
+          closed: (opened === false && !tail),
+          moving: moving
+        }
+      ]"
       v-on="handlers"
       ref="bottomSheet"
   >
@@ -38,7 +38,7 @@
 <script>
 import Hammer from "hammerjs";
 export default {
-  name: "VueBottomSheet",
+  name: "BottomSheet",
   data() {
     const vm = this;
     return {
@@ -97,6 +97,10 @@ export default {
       type: String,
       default: "#0000004D"
     },
+    tail: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     isIphone() {

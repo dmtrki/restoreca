@@ -3,6 +3,7 @@ import { gql } from 'nuxt-graphql-request'
 export const state = () => ({
   appbar: {
     title: '',
+    subtitle: '',
     previous: null,
     action: null,
     show: true,
@@ -37,12 +38,15 @@ export const mutations = {
   SET_APPBAR_TITLE (state, data) {
     state.appbar.title = data
   },
+  SET_APPBAR_SUBTITLE (state, data) {
+    state.appbar.subtitle = data
+  },
   SET_APPBAR_PREVIOUS (state, data) {
     state.appbar.previous = data
   },
   SET_APPBAR_ACTION (state, data) {
     state.appbar.action = data
-  }
+  },
   // SHOW_CALLBACK_MODAL (state) {
   //   state.callbackModal = true
   // },

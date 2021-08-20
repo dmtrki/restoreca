@@ -15,6 +15,7 @@
     </div>
     <MmmSection>
       <List
+        ref="productsList"
         v-if="total"
         v-model="loading"
         :finished="finished"
@@ -25,7 +26,7 @@
         <ReCardProduct 
           v-for="product in products" 
           :key="product.id"
-          horizontal 
+          horizontal
           v-bind="product" 
         />
 
@@ -53,9 +54,9 @@
       v-model="state.filtersSheet" 
       title="Аттрибуты товаров"
     >
-      <div class="catalogFilters">
-
-      </div>
+      <ReCatalogFilters
+        :category-uuid="category.uuid"
+      />
     </ActionSheet>
   </div>
 </template>
@@ -72,15 +73,24 @@ export default {
     const query = gql`
       query catalogCategory($slug: String) {
         productCategory(slug: $slug) {
-          slug,
-          uuid,
+          id
+          uuid
+          slug
           title
+          parent {
+            slug,
+            title
+          }
         }
       }
     `,
-          request = await $gqlr(query, {slug: params.slug})
+          request = await $gqlr(query, {slug: params.child_slug ?? params.slug})
     await store.commit('SET_APPBAR_TITLE', request.productCategory.title)
-    return {category: request.productCategory}
+    await store.commit('SET_APPBAR_PREVIOUS', request.productCategory.parent)
+    return {
+      category: request.productCategory,
+      parent: request.productCategory.parent
+    }
   },
   data() {
     return {
@@ -92,23 +102,28 @@ export default {
       gqlRequestSending: false,
       page: 0,
       perPage: 12,
-      sorting: 'popularity',
+      sorting: 'VIEWS',
       filters: {},
       options: {
         sorting: [
           {
-            value: 'popularity',
-            text: 'по популярности'
+            value: 'VIEWS',
+            text: 'сначала популярные'
           },
           {
-            value: 'price-from-low',
+            value: 'PRICE-ASC',
             text: 'сначала дешевле'
           },
           {
-            value: 'price-from-high',
+            value: 'PRICE-DESC',
             text: 'сначала дороже'
           },
         ]
+      },
+      sortingColumns: {
+        'VIEWS': {column: 'VIEWS', order: 'DESC'},
+        'PRICE-ASC': {column: 'PRICE', order: 'ASC'},
+        'PRICE-DESC': {column: 'PRICE', order: 'DESC'},
       },
       state: {
         sortingSheet: false,
@@ -118,19 +133,19 @@ export default {
   },
   head() {
       return {
-        title: this.category.title,
+        title: this.parent ? this.parent.title + ' ' + this.category.title : this.category.title,
       }
   },
   fetchOnServer: false,
   async fetch() {
     const query = gql`
-      query count($category_uuid: UUID) {
+      query count($category_id: Int) {
         productsCount(
-          category_uuid: $category_uuid
+          category_id: $category_id
         )
       }
     `
-    const response = await this.$gqlr(query, {category_uuid: this.category.uuid})
+    const response = await this.$gqlr(query, {category_id: this.category.id})
     this.$log(response)
     this.total = response.productsCount
   },
@@ -150,21 +165,26 @@ export default {
     }
   },
   methods: {
+    reload() {
+      this.products = []
+      this.page = 0
+      this.load()
+    },
     load() {
       if (this.gqlRequestSending || this.finished) return
       this.page = this.page + 1
       const query = gql`
         query catalogProducts (
-          $category_uuid: UUID, 
+          $category_id: Int, 
           $page: Int, 
           $per_page: Int, 
-          # $sorting: String
+          $sorting: [QueryProductsLazySortingOrderByClause!]
         ) {
           productsLazy (
-            category_uuid: $category_uuid, 
+            category_id: $category_id, 
             first: $per_page, 
             page: $page, 
-            # sorting: $sorting
+            sorting: $sorting
           ) {
             paginatorInfo {
               count
@@ -173,18 +193,22 @@ export default {
             }
             data {
               id
+              uuid
               title
               slug
+              price
               price_formatted
+              thumb
+              description_cutted
             }
           }
         }
       `
       const variables = {
-        category_uuid: this.category.uuid,
+        category_id: this.category.id,
         page: this.page,
         per_page: this.perPage,
-        // sorting: this.sorting
+        sorting: [this.sortingColumns[this.sorting]]
       }
       this.gqlRequestSending = true
       this.$gqlr(query, variables)
@@ -211,9 +235,13 @@ export default {
     showSortingSheet() {
       this.state.sortingSheet = true
     },
+    showFiltersSheet() {
+      this.state.filtersSheet = true
+    },
     onSortingSelect(item) {
       if (item.disabled) return
       this.sorting = item.value
+      this.reload()
     }
   },
   mounted() {

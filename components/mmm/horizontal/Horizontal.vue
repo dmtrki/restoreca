@@ -75,13 +75,16 @@ export default {
   .btn-left, .btn-right {
     padding: 6px;
     height: 100%;
+    width: 42px;
+
+    path {fill: $main}
   }
 
   .btn-left {
-    background: linear-gradient(to left, #ffffff00 0, #fff 50%, #fff);
+    background: linear-gradient(to left, #ffffff08 0, #ffffff21 50%, #ffffff34);
   }
 
   .btn-right {
-    background: linear-gradient(to right, #ffffff00 0, #fff 50%, #fff);
+    background: linear-gradient(to right, #ffffff21 0, #ffffff55 50%, #ffffff89);
   }
 </style>
