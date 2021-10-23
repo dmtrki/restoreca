@@ -1,7 +1,7 @@
 <template>
-  <LazyNuxtDynamic 
-    :component="componentDeviceTyped" 
-    :hydration="hydration" 
+  <LazyNuxtDynamic
+    :component="componentDeviceTyped"
+    :hydration="hydration"
     :component-data="componentData"
     v-bind="$attrs"
     v-on="$listeners"
@@ -32,12 +32,17 @@ export default {
     componentData: {
       type: Object | Array | String | Boolean | Number,
       default: () => {}
+    },
+    mobileOnly: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     componentDeviceTyped() {
-      return this.prefix + this.componentName + 'Mobile'
-      // return this.$device.isDesktopOrTablet ? this.componentName + 'Desktop' : this.componentName + 'Mobile'
+      if (this.mobileOnly) return this.prefix + this.componentName + 'Mobile'
+      return this.$device.isDesktopOrTablet ? this.componentName + 'Desktop' : this.componentName + 'Mobile'
+
     }
   }
 }

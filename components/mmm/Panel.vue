@@ -1,76 +1,29 @@
 <template>
   <div :class="classList">
-    
+    <slot />
   </div>
 </template>
 <script>
+import theming from '~/mixins/mmm/componentTheming'
+
 export default {
+  mixins: [theming],
   props: {
-    theme: {
-      type: String | Boolean,
-      default: false
-    },
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    secondary: {
-      type: Boolean,
-      default: false
-    },
-    accent: {
-      type: Boolean,
-      default: false
-    },
-    link: {
-      type: Boolean,
-      default: false
-    },
-    closeIcon: {
-      type: Boolean,
-      default: false
-    },
-    offsetY: {
-      type: Number,
-      default: 0
-    },
-    offsetX: {
-      type: Number,
-      default: 0
-    },
     padding: {
-      type: Number,
-      default: 2
+      type: Boolean | Number,
+      default: false
     }
   },
   data() {
     return {
-      classPrefix: 'mmm',
       classBase: 'Panel',
-      modifiers: {
-        theme: ['primary', 'secondary', 'accent', 'info', 'promo'],
-        icon: [''],
-        offset: ['offY_1', 'offY_2', 'offY_3', 'offX_1', 'offX_2', 'offX_3'],
-      },
-      cssIcons: []
     }
   },
   computed: {
     classList() {
-      const t = this,
-            b = t.classPrefix + t.classBase
-      let classList = [b]
+      let classList = this.classListBase
 
-      if (t.theme && t.modifiers.theme.includes(t.theme)) classList.push(`${b}--${t.theme}`)
-
-      if (!t.theme && (t.primary || t.secondary || t.accent || t.link)) {
-        let theme = 'info'
-        if (t.primary) theme = 'primary'
-        if (t.secondary) theme = 'secondary'
-        if (t.accent) theme = 'accent'
-        if (t.link) theme = 'link'
-        classList.push(`${b}--${theme}`)
-      }
+      if (this.padding) classList.push(this.classRoot + '--paddy_' + this.padding)
 
       return classList.join(' ')
     }
@@ -81,7 +34,21 @@ export default {
 
 <style lang="scss">
   .mmmPanel {
+    @include vmin(padding, 13px);
+    position: relative;
     display: flex;
-    
+    border-radius: 13px;
+    background-color: rgba(255, 255, 255, 0.808);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      filter: blur(5px);
+      border-radius: 13px;
+    }
   }
 </style>

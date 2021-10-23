@@ -1,75 +1,42 @@
 <template>
-  <div>
-    <NuxtLink 
-      v-if="isLink"
-      v-bind="$attrs"
-      v-on="$listeners"
-      :to="to"
-      :class="classList"
-    >
-      <div :class="classRoot + '__main'">
-        <template v-if="!($slots.default || [])[0]">
-          <h4 :class="classRoot + '__title'">{{ title }}</h4>
-          <span :class="classRoot + '__subtitle' + ' text-xs text-gray-500 leading-none'">{{ subtitle }}</span>
-        </template>
-        <slot />
-      </div>
-      <div :class="classRoot + '__action'">
-        <MmmCssIcon v-if="!($slots.action || [])[0]" type="next" />
-        <slot name="action" />
-      </div>
-    </NuxtLink>
-    <div 
-      v-else       
-      v-bind="$attrs"
-      v-on="$listeners"
-      :class="classList"
-    >
-      <div :class="classRoot + '__main'">
-        <template v-if="!($slots.default || [])[0]">
-          <h4 :class="classRoot + '__title'">{{ title }}</h4>
-          <span :class="classRoot + '__subtitle' + ' text-xs text-gray-500 leading-none'">{{ subtitle }}</span>
-        </template>
-        <slot />
-      </div>
-      <div :class="classRoot + '__action'">
-        <MmmCssIcon v-if="!($slots.action || [])[0]" type="next" />
-        <slot name="action" />
-      </div>
+  <Component
+    :is="tag"
+    v-bind="$attrs"
+    v-on="$listeners"
+    :to="to"
+    :class="classList"
+  >
+    <div :class="classRoot + '__main'">
+      <template v-if="!($slots.default || [])[0]">
+        <MmmTitle :title="title" :subtitle="subtitle" />
+      </template>
+      <slot />
     </div>
-  </div>
+    <div :class="classRoot + '__action'">
+      <MmmCssIcon v-if="!($slots.action || [])[0]" type="next" />
+      <slot name="action" />
+    </div>
+  </Component>
 </template>
 
 <script>
-import themingMixing from "@/mixins/mmm/componentTheming";
+import themingMixing from "@/mixins/mmm/componentTheming"
+import {_pbf, _ps} from '~~/services/helpers/componentHelpers'
 
 export default {
   mixins: [themingMixing],
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    subtitle: {
-      type: String,
-      default: ''
-    },
-    action: {
-      type: String,
-      default: ''
-    },
+    title: _ps,
+    subtitle: _ps,
+    action: _ps,
+    actionOnTop: _pbf,
     background: {
       type: String | Boolean,
       default: false
     },
-    border: {
-      type: Boolean,
-      default: false
-    },
-    to: {
-      type: String,
-      default: ''
-    }
+    border: _pbf,
+    equal: _pbf,
+    to: _ps
   },
   data() {
     return {
@@ -77,8 +44,14 @@ export default {
     }
   },
   computed: {
+    tag() {
+      return (this.to === '') ? 'div' : 'NuxtLink'
+    },
     classList() {
       let classList = this.classListBase
+
+      if (this.actionOnTop) classList.push(this.classRoot + '--actionOnTop')
+      if (this.equal) classList.push(this.classRoot + '--equal')
 
       return classList.join(' ')
     },
@@ -93,7 +66,8 @@ export default {
 </script>
 
 <style lang="scss">
-.mmmCell {
+
+@include block(mmmCell) {
   @include vmin(margin-top, 21px);
   @include vmin(margin-bottom, 13px);
   @include vmin(padding, 13px);
@@ -104,14 +78,26 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-
-  &__title {
-    font-size: 1.1rem;
-    font-weight: 500;
+  @include element(main) {
+    flex: 1 0 55%;
   }
 
-  &__action {
+  @include element(action) {
+    flex: 1;
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  @include modifier(actionOnTop) {
+    align-items: flex-start;
+  }
+  
+  @include modifier(equal) {
+    
+    @include element(main) {
+      flex: 1;
+    }
   }
 }
 </style>

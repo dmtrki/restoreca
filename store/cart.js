@@ -1,14 +1,11 @@
 export const state = () => ({
-  version: 0.1,
+  version: 0.2,
   items: [],
   count: 0 ,
-  delivery: {
-    type: '',
-    address_uuid: ''
-  },
-  payment: {
-    type: ''
-  },
+  deliveryType: false,
+  deliveryAddress: false,
+  deliveryStorage: false,
+  paymentType: false,
   addresses: [],
   added: false
 })
@@ -34,14 +31,17 @@ export const mutations = {
     });
     state.count = counter
   },  
-  SET_DELIVERY (state, payload) {
-    state.delivery = payload.deliveryType
+  SET_DELIVERY_TYPE (state, deliveryType) {
+    state.deliveryType = deliveryType
   },
-  SET_DELIVERY_DATA (state, payload) {
-    state.deliveryData = payload.deliveryData
+  SET_DELIVERY_ADDRESS (state, deliveryAddress) {
+    state.deliveryAddress = deliveryAddress
   },
-  SET_PAYMENT (state, payload) {
-    state.payment = payload.paymentType
+  SET_DELIVERY_STORAGE (state, deliveryStorage) {
+    state.deliveryStorage = deliveryStorage
+  },
+  SET_PAYMENT (state, paymentType) {
+    state.paymentType = paymentType
   },
 }
 export const getters = {
@@ -57,13 +57,13 @@ export const actions = {
   async setQuantity ({ commit }, { uuid, qty }) {
     await commit('SET_PRODUCT_QTY', { uuid, qty })
   },
-  async setDelivery ({ commit }, deliveryType) {
-    await commit('SET_DELIVERY', deliveryType)
+  async setDeliveryType ({ commit }, deliveryType) {
+    await commit('SET_DELIVERY_TYPE', deliveryType)
   },
-  async setDeliveryData ({ commit }, data) {
-    await commit('SET_DELIVERY_DATA', data)
+  async setDeliveryAddress ({ commit }, deliveryAddress) {
+    await commit('SET_DELIVERY_ADDRESS', deliveryAddress)
   },
-  async setPayment ({ commit }, paymentType) {
-    await commit('SET_PAYMENT', paymentType)
+  async setDeliveryStorage ({ commit }, deliveryStorage) {
+    await commit('SET_DELIVERY_STORAGE', deliveryStorage)
   },
 }

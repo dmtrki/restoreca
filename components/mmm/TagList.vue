@@ -4,9 +4,10 @@
   </div>
 </template>
 <script>
+import componentTheming from '~/mixins/mmm/componentTheming'
 
 export default {
-  mixins: [componentBase],
+  mixins: [componentTheming],
   props: {
     multiRow: {
       type: Boolean,

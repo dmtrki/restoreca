@@ -1,6 +1,7 @@
-const { basename } = require('path');
+import { basename } from 'path';
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default {
+export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'restoreca',
@@ -22,18 +23,18 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/rusEndings',
-    '@/plugins/horizontal',
-    '@/plugins/gqlr',
-    { src: '~plugins/touch', ssr: false }
+    '~/plugins/rusEndings',
+    '~/plugins/horizontal',
+    '~/plugins/gqlr',
+    // '~/plugins/persistedState.client.js',
+    '~/plugins/touch.client.js',
   ],
-  
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     { path: '~/components/', pathPrefix: false, prefix: 're' },
     { path: '~/components/mmm/', pathPrefix: false, prefix: 'mmm'},
-    { path: '~/components/vant/', pathPrefix: false, prefix: 'va'},
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -50,11 +51,11 @@ export default {
   // https://luxdamore.github.io/nuxt-prune-html/
   // https://xhr-cache.dewib.com/
   // https://github.com/AlekseyPleshkov/nuxt-social-meta
-  // https://github.com/PivaleCo/nuxt-image-loader-module *** 
+  // https://github.com/PivaleCo/nuxt-image-loader-module ***
   // https://github.com/nuxt-community/imagemin-module
   // https://github.com/sugoidesune/nuxt-scss-to-js
   // https://github.com/Tahul/nuxt-use-motion
-  // https://github.com/nuxt-community/universal-storage-module *** 
+  // https://github.com/nuxt-community/universal-storage-module ***
   // https://github.com/paulgv/nuxt-webpackdashboard
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config
   buildModules: [
@@ -99,17 +100,17 @@ export default {
     path: './services/'
   },
 
-  // vuetify: { 
+  // vuetify: {
   //   customVariables: ['~/assets/vendor/vuetify.scss'],
   //   defaultAssets: {
   //     font: {
-  //       family: 'Montserrat' 
+  //       family: 'Montserrat'
   //     },
   //     icons: {
   //       iconfont: 'mdiSvg',
   //     },
   //   },
-  //   treeShake: true, 
+  //   treeShake: true,
   // },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -117,7 +118,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://github.com/blokwise/dynamic
-    '@blokwise/dynamic'
+    '@blokwise/dynamic',
+    'nuxt-blurhash'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -126,17 +128,18 @@ export default {
     debug: false
   },
 
-  loading: { 
-    color: '#8a02ee', 
+  loading: {
+    color: '#8a02ee',
   },
-
-  globalName: 'rstrc',
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // transpile: [/vant.*?less/],
     transpile: [
-      'horizontal'
+      'horizontal',
+      'vee-validate/dist/rules',
+      'touch',
+      // 'persistedState'
     ],
     babel: {
       plugins: [
@@ -167,7 +170,7 @@ export default {
       // if (ctx.isServer) {
       //   config.resolve.alias['hammerjs$'] = this.options.rootDir + 'node_modules/vue-touch/dist/hammer-ssr.js'
       // }
-      
+
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/;
@@ -194,38 +197,5 @@ export default {
         ],
       });
     },
-    /*
-    postcss: {
-      plugins: {
-        'postcss-px-to-viewport': {
-          unitToConvert: 'px',
-          viewportWidth: 375,
-          unitPrecision: 5,
-          propList: ['*'],
-          viewportUnit: 'vw',
-          fontViewportUnit: 'rem',
-          selectorBlackList: [],
-          minPixelValue: 1,
-          mediaQuery: false,
-          replace: true,
-          exclude: undefined,
-          include: undefined,
-          landscape: false,
-          landscapeUnit: 'vw',
-          landscapeWidth: 568
-        },
-        'postcss-pxtorem': {
-          rootValue: 16,
-          unitPrecision: 5,
-          propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
-          selectorBlackList: [],
-          replace: true,
-          mediaQuery: false,
-          minPixelValue: 1,
-          exclude: /node_modules/i
-        },
-      }
-    }
-    */
   }
-}
+})

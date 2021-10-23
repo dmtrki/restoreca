@@ -1,77 +1,14 @@
+import { _themeProps, _stateProps, _sizeProps, _axisOffsetProps } from '../../services/helpers/componentHelpers'
+
 export default {
   props: {
-    // *** SIZING *** 
-    size: {
-      type: String | Boolean,
-      default: false
-    },
-    small: {
-      type: Boolean,
-      default: false
-    },
-    large: {
-      type: Boolean,
-      default: false
-    },
-    xsmall: {
-      type: Boolean,
-      default: false
-    },
-    smallest: {
-      type: Boolean,
-      default: false
-    },
-    xlarge: {
-      type: Boolean,
-      default: false
-    },
-    // *** THEMING *** 
-    theme: {
-      type: String | Boolean,
-      default: false
-    },
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    secondary: {
-      type: Boolean,
-      default: false
-    },
-    accent: {
-      type: Boolean,
-      default: false
-    },
-    link: {
-      type: Boolean,
-      default: false
-    },
-    info: {
-      type: Boolean,
-      default: false
-    },
-      // state based
-    success: {
-      type: Boolean,
-      default: false
-    },
-    warning: {
-      type: Boolean,
-      default: false
-    },
-    error: {
-      type: Boolean,
-      default: false
-    },
+    ..._themeProps,
+    ..._stateProps,
+    ..._sizeProps,
+    ..._axisOffsetProps,
+    
     // *** POSITIONING *** 
-    offsetY: {
-      type: Number,
-      default: 0
-    },
-    offsetX: {
-      type: Number,
-      default: 0
-    }
+    
   },
   data() {
     return {
@@ -121,9 +58,9 @@ export default {
     },
     classListBase() {
       let classList = [this.classRoot]
-      classList.push(`${this.classRoot}--${this.themed}`)
       classList.push(`${this.classRoot}--${this.sized}`)
-      if (this.stated) classList.push(`${this.classRoot}--${this.stated}`)
+      if (!this.outline) classList.push(`${this.classRoot}--${this.themed}`)
+      if (this.stated) classList.push(`is-${this.stated}`)
       if (this.offsetX !== 0) classList.push(`${this.classRoot}--offsetX_${this.offsetX}`)
       if (this.offsetY !== 0) classList.push(`${this.classRoot}--offsetY_${this.offsetY}`)
       return classList

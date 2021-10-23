@@ -1,5 +1,13 @@
 <template>
-  <div class="appbar" ref="appbar">
+  <div 
+    :class="[
+      'appbar',
+      {
+        'is-hidden': !show
+      }
+    ]" 
+    ref="appbar"
+  >
    <div class="appbar__back" @click="back">
      <MmmCssIcon type="prev" />
     </div>  
@@ -22,11 +30,17 @@ export default {
   components: {
     NavBar
   },
+  data() {
+    return {
+
+    }
+  },
   computed: {
     ...mapState({
       title: state => state.appbar.title,
       subtitle: state => state.appbar.subtitle,
-      previous: state => state.appbar.previous 
+      previous: state => state.appbar.previous,
+      show: state => state.appbar.show
     })
   },
   methods: {
@@ -35,13 +49,15 @@ export default {
     }
   },
   mounted() {
-    let appbarTitleWidth = this.$refs.appbarTitle.offsetWidth,
-        appbarWidth = this.$refs.appbar.offsetWidth,
-        allowedWidth = appbarWidth - 136
+    if (this.$refs.appbarTitle) {
+      let appbarTitleWidth = this.$refs.appbarTitle.offsetWidth,
+          appbarWidth = this.$refs.appbar.offsetWidth,
+          allowedWidth = appbarWidth - 136
 
-    if (appbarTitleWidth > allowedWidth) {
-      const titleFontSize =  allowedWidth * 0.08
-      this.$refs.appbarTitle.style.fontSize = titleFontSize + 'px'
+      if (appbarTitleWidth > allowedWidth) {
+        const titleFontSize =  allowedWidth * 0.08
+        this.$refs.appbarTitle.style.fontSize = titleFontSize + 'px'
+      }
     }
   },
 }
@@ -60,6 +76,7 @@ export default {
   border-radius: 0 0 21px 21px;
   display: flex;
   align-items:center;
+  transition: all .34s ease-out;
   @include element(back) {
     @include flex-centered;
     @include fluid(width, 42px);
@@ -81,6 +98,10 @@ export default {
     @include fluid(width, 42px);
     @include fluid(height, 42px);
     flex-shrink: 0;
+  }
+
+  @include when(hidden) {
+    margin-top: -110px;
   }
 }
 

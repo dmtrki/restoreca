@@ -2,6 +2,7 @@
   <div 
     v-touch:tap="open" 
     v-touch:swipe.top="open" 
+    v-touch:swipe.bottom="close" 
     :class="classList"
   >
     <div v-if="title" :class="classRoot + '__title'">
@@ -23,7 +24,15 @@ export default {
     tail: {
       type: Boolean,
       default: false
-    }
+    },
+    accent: {
+      type: Boolean,
+      default: false
+    },
+    relative: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -36,15 +45,21 @@ export default {
       const r = this.classRoot
       let classList = [r]
 
-      if (this.tail) classList.push(r + '--is-taily')
+      if (this.tail) classList.push(r + '--taily')
+      if (this.accent) classList.push(r + '--accent')
+      if (this.relative) classList.push(r + '--relative')
+
       if (this.isOpen) classList.push('is-open')
 
       return classList.join(' ')
     }
   },
   methods: {
-    open(el) {
+    open() {
       this.isOpen = true
+    },
+    close() {
+      this.isOpen = false
     },
     onSwipe(direction, el) {
 
@@ -61,7 +76,7 @@ export default {
     left: 0;
     width: 100%;
     border-radius: 34px 34px 0 0;
-    background-color: #F7F8FF;
+    background-color: rgba(247, 248, 255, 0.89);
     box-shadow: 0 -5px 0 #E8EBFF;
 
     @include element(title) {
@@ -82,6 +97,11 @@ export default {
     @include modifier(accent) {
       background: linear-gradient(132.41deg, rgba(244, 246, 251, 0.89) 0%, #E1E8FF 97.92%);
       border: 2px solid #E1E8FF;
+    }
+
+    @include modifier(relative) {
+      position: relative;
+      @include vmin(margin-top, 34px);
     }
 
     @include when(open) {

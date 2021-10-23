@@ -26,10 +26,10 @@ export const mutations = {
     state.layoutCatalog = data
   },
   // *** Appbar  
-  SHOW_APPBAR (state, data) {
+  SHOW_APPBAR (state) {
     state.appbar.show = true
   },
-  HIDE_APPBAR (state, data) {
+  HIDE_APPBAR (state) {
     state.appbar.show = false
   },
   TOGGLE_APPBAR_LOADING (state, data) {

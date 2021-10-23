@@ -8,7 +8,7 @@
          <div class="homeHeader__phone">
             {{commonData.common_phone}}
           </div>
-          <MmmButton 
+          <MmmButton
             secondary
             small
             icon="phone"
@@ -51,17 +51,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .logo {
-    display: flex;
-    align-items: center;
-    background-image: url(~/assets/images/logo.svg);
-    background-repeat: no-repeat;
-    @include vmin(width, 44px);
-    // @include vmin(height, 66px);
-    min-height: 34px;
-    height: 100%;
-    text-decoration: none;
-  }
 
 @include block(homeHeader) {
   @include vmin(padding-left, 13px);
@@ -73,7 +62,7 @@ export default {
     justify-content: space-between;
   }
 
-  
+
 
   @include element(phone) {
     margin-bottom: 0.25rem;

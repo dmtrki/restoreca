@@ -4,8 +4,8 @@
       <ReHomeHeader />
       <ReHomePromo :promo-data="promoData" />
     </MmmSection>
-      <ReHomeCatalog :catalog-data="catalogData" />
-      <ReHomeInfo />
+    <ReHomeCatalog :catalog-data="catalogData" />
+    <ReHomeInfo />
   </section>
 </template>
 
@@ -13,8 +13,8 @@
 import { gql } from 'nuxt-graphql-request'
 
 export default {
-  // layout: (ctx) => ctx.$device.isMobile ? 'default' : 'desktop',
-  name: 'HomePage',  
+  layout: (ctx) => ctx.$device.isMobile ? 'default' : 'desktop',
+  name: 'HomePage',
   async asyncData({store, $graphql}) {
     const query = gql`
       query homepage {
@@ -44,7 +44,7 @@ export default {
         manufacturers: response.manufacturers,
         manufacturersCount: response.manufacturersCount
       }
-    }    
+    }
   },
   head() {
       return {
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      
+
     }
   },
 }

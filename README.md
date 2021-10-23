@@ -29,6 +29,7 @@
 - https://github.com/maoberlehner/vue-lazy-hydration
 - https://github.com/fuxingloh/vue-horizontal
 - https://github.com/jerrybendy/vue-touch-events
+- https://github.com/filsuck/nuxt-blurhash
 
 
 ### @nuxtjs/device
